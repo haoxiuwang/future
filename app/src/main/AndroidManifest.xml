@@ -7,7 +7,7 @@
     <application
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
-        android:label="Comet"
+        android:label="Chrome"
         android:icon="@drawable/cover"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity

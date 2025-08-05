@@ -33,10 +33,11 @@ public class MainActivity extends AppCompatActivity {
                     "if (!document.getElementById('dict-btn')) {" +
                     "  var btn = document.createElement('button');" +
                     "  btn.id = 'dict-btn';" +
-                    "  btn.innerText = '查词';" +
+                    "  btn.innerText = 'Bing Dict';" +
                     "  btn.style.position = 'fixed';" +
                     "  btn.style.bottom = '20px';" +
                     "  btn.style.right = '20px';" +
+                    "  btn.style.left = '20px';" +                    
                     "  btn.style.zIndex = '9999';" +
                     "  btn.style.padding = '10px 15px';" +
                     "  btn.style.backgroundColor = '#0078D7';" +
