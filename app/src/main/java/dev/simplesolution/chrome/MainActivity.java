@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     .show();
                 return true;
             }
-        });
+    
             @Override
             public void onPageFinished(WebView view, String url) {
                 view.evaluateJavascript("(function() { " +
