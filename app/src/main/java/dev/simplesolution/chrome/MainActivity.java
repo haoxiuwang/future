@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true; // 拦截，不交给 WebView 处理
                 }
+                addressBar.setText(url);
                 return false; // 其他情况由 WebView 处理
             }
             @Override
