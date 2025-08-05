@@ -28,18 +28,6 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("提示")
-                    .setMessage(message)
-                    .setPositiveButton("确定", (dialog, which) -> result.confirm())
-                    .setCancelable(false)
-                    .create()
-                    .show();
-                return true;
-            }
-    
-            @Override
             public void onPageFinished(WebView view, String url) {
                 view.evaluateJavascript("(function() { " +
                     "alert('启动完成')" +
@@ -72,6 +60,19 @@ public class MainActivity extends AppCompatActivity {
                     "};" +
 
                 "})()", null);
+            }
+        });
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+                new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("提示")
+                    .setMessage(message)
+                    .setPositiveButton("确定", (dialog, which) -> result.confirm())
+                    .setCancelable(false)
+                    .create()
+                    .show();
+                return true;
             }
         });
 
