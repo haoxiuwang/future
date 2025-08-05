@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
-                view.evaluateJavascript("(function() { " +
+                String code = "(function() { " +
                     "alert('启动完成')" +
                     // 添加查词按钮
                     "if (!document.getElementById('dict-btn')) {" +
@@ -62,7 +62,11 @@ public class MainActivity extends AppCompatActivity {
                     "  }" +
                     "};" +
                     "alert('ok!')"+
-                "})()", null);
+                "})()"
+                new Handler().postDelayed(() -> {
+                    view.evaluateJavascript(code, null);
+                }, 500); // 延迟 500ms 再注入
+                
             }
         });
         webView.setWebChromeClient(new WebChromeClient() {
