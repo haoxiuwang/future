@@ -45,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
                     "  btn.style.border = 'none';" +
                     "  btn.style.borderRadius = '8px';" +
                     "  btn.style.fontSize = '16px';" +
-                    "  btn.style.display = 'none';" +
+                    "  btn.style.display = 'flex';" +
+                    "  btn.style.placeContent = 'center';" +
+                    "  btn.style.placeItems = 'center';" +
                     "  document.body.appendChild(btn);" +
                     "}" +
                     "document.getElementById('dict-btn').onclick = function() {" +
