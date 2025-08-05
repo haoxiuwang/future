@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     "    window.open('https://cn.bing.com/dict/search?q=' + encodeURIComponent(word),'bingdict')" +                    
                     "  }" +
                     "};" +
+                    "alert('ok!')"
 
                 "})()", null);
             }
