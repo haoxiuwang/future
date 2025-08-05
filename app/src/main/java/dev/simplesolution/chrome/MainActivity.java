@@ -31,6 +31,18 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
             @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                String url = request.getUrl().toString();
+                // 判断是否要外部打开（例如所有 http/https 链接）
+                if (url.contains("bing")) {
+                    // 使用 Intent 在外部浏览器打开
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                    return true; // 拦截，不交给 WebView 处理
+                }
+                return false; // 其他情况由 WebView 处理
+            }
+            @Override
             public void onPageFinished(WebView view, String url) {
                 String jsCode = """
                         (function() {
