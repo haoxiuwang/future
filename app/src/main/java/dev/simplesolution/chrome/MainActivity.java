@@ -48,23 +48,10 @@ public class MainActivity extends AppCompatActivity {
                     "  btn.style.display = 'none';" +
                     "  document.body.appendChild(btn);" +
                     "}" +
-
-                    // 监听选中文字
-                    "document.addEventListener('selectionchange', function() {" +
-                    "  var selected = window.getSelection().toString().trim();" +
-                    "  var btn = document.getElementById('dict-btn');" +
-                    "  if (selected.length > 0 && selected.split(/\\s+/).length === 1) {" +
-                    "    btn.style.display = 'block';" +
-                    "  } else {" +
-                    "    btn.style.display = 'none';" +
-                    "  }" +
-                    "});" +
-
-                    // 点击按钮跳转 Bing
                     "document.getElementById('dict-btn').onclick = function() {" +
                     "  var word = window.getSelection().toString().trim();" +
                     "  if (word.length > 0) {" +
-                    "    window.location.href = 'https://cn.bing.com/dict/search?q=' + encodeURIComponent(word);" +
+                    "    window.open('https://cn.bing.com/dict/search?q=' + encodeURIComponent(word),'bingdict')" +                    
                     "  }" +
                     "};" +
 
@@ -92,5 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
         // 默认加载主页
         webView.loadUrl("https://www.bing.com");
+    }
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack(); // WebView 内部后退
+        } else {
+            super.onBackPressed(); // 应用关闭或返回上一个 Activity
+        }
     }
 }
