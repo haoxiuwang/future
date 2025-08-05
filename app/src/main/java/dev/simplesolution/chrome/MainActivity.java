@@ -32,39 +32,42 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
-                String code = "(function() { " +
-                    "alert('启动完成')" +
-                    // 添加查词按钮
-                    "if (!document.getElementById('dict-btn')) {" +
-                    "  var btn = document.createElement('button');" +
-                    "  btn.id = 'dict-btn';" +
-                    "  btn.innerText = 'Bing Dict';" +
-                    "  btn.style.position = 'fixed';" +
-                    "  btn.style.bottom = '20px';" +
-                    "  btn.style.right = '20px';" +
-                    "  btn.style.left = '20px';" +                    
-                    "  btn.style.zIndex = '9999';" +
-                    "  btn.style.padding = '10px 15px';" +
-                    "  btn.style.backgroundColor = '#0078D7';" +
-                    "  btn.style.color = 'white';" +
-                    "  btn.style.border = 'none';" +
-                    "  btn.style.borderRadius = '8px';" +
-                    "  btn.style.fontSize = '16px';" +
-                    "  btn.style.display = 'flex';" +
-                    "  btn.style.placeContent = 'center';" +
-                    "  btn.style.placeItems = 'center';" +
-                    "  document.body.appendChild(btn);" +
-                    "}" +
-                    "document.getElementById('dict-btn').onclick = function() {" +
-                    "  var word = window.getSelection().toString().trim();" +
-                    "  if (word.length > 0) {" +
-                    "    window.open('https://cn.bing.com/dict/search?q=' + encodeURIComponent(word),'bingdict')" +                    
-                    "  }" +
-                    "};" +
-                    "alert('ok!')"+
-                "})()"
+                String jsCode = """
+                        (function() {
+                            alert('启动完成');
+                            // 添加查词按钮
+                            if (!document.getElementById('dict-btn')) {
+                                var btn = document.createElement('button');
+                                btn.id = 'dict-btn';
+                                btn.innerText = 'Bing Dict';
+                                btn.style.position = 'fixed';
+                                btn.style.bottom = '20px';
+                                btn.style.right = '20px';
+                                btn.style.left = '20px';
+                                btn.style.zIndex = '9999';
+                                btn.style.padding = '10px 15px';
+                                btn.style.backgroundColor = '#0078D7';
+                                btn.style.color = 'white';
+                                btn.style.border = 'none';
+                                btn.style.borderRadius = '8px';
+                                btn.style.fontSize = '16px';
+                                btn.style.display = 'flex';
+                                btn.style.placeContent = 'center';
+                                btn.style.placeItems = 'center';
+                                document.body.appendChild(btn);
+                            }
+                            document.getElementById('dict-btn').onclick = function() {
+                                var word = window.getSelection().toString().trim();
+                                if (word.length > 0) {
+                                    window.open('https://cn.bing.com/dict/search?q=' + encodeURIComponent(word), 'bingdict');
+                                }
+                            };
+                            alert('ok!');
+                        })();
+                        """;
+
                 new Handler().postDelayed(() -> {
-                    view.evaluateJavascript(code, null);
+                    view.evaluateJavascript(jsCode, null);
                 }, 500); // 延迟 500ms 再注入
                 
             }
