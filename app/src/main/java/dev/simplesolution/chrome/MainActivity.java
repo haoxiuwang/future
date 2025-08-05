@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 String jsCode = """
                         (function() {
-                            alert('启动完成');
+                          
                             // 添加查词按钮
                             if (!document.getElementById('dict-btn')) {
                                 var btn = document.createElement('button');
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                                     window.open('https://cn.bing.com/dict/search?q=' + encodeURIComponent(word), 'bingdict');
                                 }
                             };
-                            alert('ok!');
+                          
                         })();
                         """;
 
