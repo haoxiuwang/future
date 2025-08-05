@@ -12,7 +12,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.webkit.WebChromeClient;
 import android.os.Handler;
-
+import android.content.Intent;
+import android.net.Uri;
+import android.webkit.WebResourceRequest;
 
 public class MainActivity extends AppCompatActivity {
 
