@@ -1,3 +1,4 @@
+package dev.simplesolution.chrome;
 import java.util.Arrays;
 public class LocalMemory {
     // 历史记录数组，固定长度15
