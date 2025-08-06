@@ -1,73 +1,100 @@
 package dev.simplesolution.chrome;
+
 import java.util.Arrays;
+import java.util.Objects;
+
+/**
+ * 固定容量的历史记录存储器（线程不安全，需外部同步）
+ */
 public class LocalMemory {
-    // 历史记录数组，固定长度15
-    private String[] history;
-    // 当前记录数量
-    private int count;
-    
+    private final String[] history;  // 核心数组
+    private int count;               // 实际记录数
+    private static final int MAX_SIZE = 15;
+
     public LocalMemory() {
-        history = new String[15]; // 初始化长度为15的数组
-        count = 0; // 初始记录数为0
+        history = new String[MAX_SIZE];
+        count = 0;
     }
-    
+
     /**
-     * 添加新历史记录
-     * @param newRecord 新记录内容
+     * 添加新记录（自动去重，满时淘汰最旧记录）
+     * @param newRecord 非空记录内容
      */
     public void addRecord(String newRecord) {
-        for (int i = 0; i < history.length; i++) {
-            if(history[i] == newRecord){
+        if (newRecord == null || newRecord.trim().isEmpty()) {
+            return;
+        }
+
+        // 检查重复（避免相同记录重复存储）
+        for (int i = 0; i < count; i++) {
+            if (newRecord.equals(history[i])) {
+                // 如果记录已存在，将其移到最新位置（可选行为）
+                moveRecordToLatest(i);
                 return;
-            }            
-        }
-        // 如果数组已满，先向前移动所有记录
-        if (count == history.length) {
-            // 将所有元素向前移动一位
-            for (int i = 0; i < history.length - 1; i++) {
-                history[i] = history[i + 1];
             }
-        } else {
-            count++; // 记录数增加
         }
-        
-        // 将新记录添加到最后一个位置
-        history[count - 1] = newRecord;
+
+        // 数组已满时，移除最旧记录（下标0）
+        if (count == MAX_SIZE) {
+            System.arraycopy(history, 1, history, 0, MAX_SIZE - 1);
+            count--;
+        }
+
+        // 添加新记录到末尾
+        history[count] = newRecord;
+        count++;
     }
-    
+
+    // 将已存在的记录移动到最新位置（内部方法）
+    private void moveRecordToLatest(int existingIndex) {
+        String existingRecord = history[existingIndex];
+        System.arraycopy(history, existingIndex + 1, history, existingIndex, count - existingIndex - 1);
+        history[count - 1] = existingRecord;
+    }
+
     /**
-     * 获取所有历史记录
-     * @return 包含所有记录的数组（可能包含null）
+     * 获取当前记录数量
      */
-    public String[] getAllRecords() {
+    public int getCount() {
+        return count;
+    }
+
+    /**
+     * 获取指定位置的记录（供Adapter的getItem()调用）
+     * @throws IndexOutOfBoundsException 如果位置无效
+     */
+    public String getRecordAt(int index) {
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
+        }
+        return history[index];
+    }
+
+    /**
+     * 返回原始数组的直接引用（仅供Adapter使用！外部禁止修改！）
+     */
+    public String[] getRawArrayForAdapter() {
         return history;
     }
-    
+
     /**
-     * 获取最近N条记录
-     * @param n 要获取的记录数
-     * @return 包含最近N条记录的数组
+     * 获取最近N条记录（安全的副本）
      */
     public String[] getRecentRecords(int n) {
-        n = Math.min(n, count); // 不能超过现有记录数
-        String[] result = new String[n];
-        System.arraycopy(history, count - n, result, 0, n);
-        return result;
+        n = Math.min(Math.max(n, 0), count);  // 确保n在[0, count]范围内
+        return Arrays.copyOfRange(history, count - n, count);
     }
-    
+
     /**
-     * 清空历史记录
+     * 清空所有记录
      */
     public void clear() {
         Arrays.fill(history, null);
         count = 0;
     }
-    
-    /**
-     * 获取当前记录数量
-     * @return 记录数量
-     */
-    public int getCount() {
-        return count;
+
+    @Override
+    public String toString() {
+        return Arrays.toString(getRecentRecords(count));
     }
 }

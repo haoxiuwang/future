@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity
     private LinearLayout historyPopup;
     private LocalMemory history;
     private LocalMemory favorite;
+    private String[] urls = new String[15];
+    private int position = 0;
     @Override
     public void onButtonClick(int position, String item, int memo){
         webView.loadUrl(item);
@@ -64,20 +66,27 @@ public class MainActivity extends AppCompatActivity
         btnCloseHistory = findViewById(R.id.btnCloseHistory);
         btnCloseFavorite = findViewById(R.id.btnCloseFavorite);
         historyList = findViewById(R.id.historyList);
-        favoriteList = findViewById(R.id.favoriteList);
+        favoriteList = findViewById(R.id.favoriteList);        
+       
+        
+        BaseAdapter adapter_f = new ButtonAdapter(
+            favorite,
+            this,
+            0              // 数据源
+        );
+        favoriteList.setAdapter(adapter_f);
+        
+            
+        BaseAdapter adapter_h = new ButtonAdapter(
+            history,
+            this,
+            0              // 数据源
+        );
+        historyList.setAdapter(adapter);
         btnHistory.setOnClickListener(v ->{
             history.addRecord(addressBar.getText().toString());
         });
-        btnHistory.setOnLongClickListener(v -> {
-            String[] records = history.getAllRecords();
-            List<String> data = new ArrayList<>(Arrays.asList(records));
-            ArrayAdapter<String> adapter = new ButtonAdapter(
-                this,  
-                data,
-                this,//接口实现
-                0              // 数据源
-            );
-            historyList.setAdapter(adapter);
+        btnHistory.setOnLongClickListener(v -> {            
             historyList.setVisibility(View.VISIBLE);
             Toast.makeText(MainActivity.this, "显示历史", Toast.LENGTH_SHORT).show();
             return true; // 返回true表示已消费事件
@@ -90,15 +99,7 @@ public class MainActivity extends AppCompatActivity
             
         });
         btnFavorite.setOnLongClickListener(v -> {
-            String[] records = favorite.getAllRecords();
-            List<String> data = new ArrayList<>(Arrays.asList(records));
-            ArrayAdapter<String> adapter = new ButtonAdapter(
-                this,  
-                data,
-                this,
-                0              // 数据源
-            );
-            favoriteList.setAdapter(adapter);
+            
             favoriteList.setVisibility(View.VISIBLE);
             Toast.makeText(MainActivity.this, "显示收藏", Toast.LENGTH_SHORT).show();
             return true; // 返回true表示已消费事件

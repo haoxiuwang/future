@@ -3,24 +3,33 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Toast;
-import java.util.List;
-import java.util.ArrayList; 
 
 
-public class ButtonAdapter extends ArrayAdapter<String> {
+
+public class ButtonAdapter extends BaseAdapter {
     private OnButtonClickListener listener;
     private int memo;
+    private final LocalMemory memory;
     public interface OnButtonClickListener {
         void onButtonClick(int position, String item, int memo);
     }
 
-    public ButtonAdapter(Context context, List<String> data, OnButtonClickListener listener, int memo) {
-        super(context, R.layout.item_button, data);
+    public ButtonAdapter(LocalMemory memory, OnButtonClickListener listener, int memo) {
         this.listener = listener;
         this.memo = memo;
+        this.memory = memory;
+    }
+     @Override
+    public int getCount() {
+        return memory.getCount(); // 实时数量
+    }
+
+    @Override
+    public String getItem(int position) {
+        return memory.getHistoryArrayForAdapter()[position]; // 直接访问原数组
     }
 
     @Override
