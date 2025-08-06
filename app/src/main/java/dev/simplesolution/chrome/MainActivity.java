@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        history = new HistoryMemory();
-        favorite = new HistoryMemory();        
+        history = new LocalMemory();
+        favorite = new LocalMemory();        
         setContentView(R.layout.activity_main);
         addressBar = findViewById(R.id.addressBar);
         webView = findViewById(R.id.webView);
