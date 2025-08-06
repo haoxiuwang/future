@@ -79,13 +79,14 @@ public class MainActivity extends AppCompatActivity
             );
             historyList.setAdapter(adapter);
             historyList.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "显示历史", Toast.LENGTH_SHORT).toShow();
+            Toast.makeText(MainActivity.this, "显示历史", Toast.LENGTH_SHORT).show();
             return true; // 返回true表示已消费事件
         });
         btnFavorite.setOnClickListener(v ->{
             String str = addressBar.getText().toString().trim();
             favorite.addRecord(str);
-            Toast.makeText(this, "收藏："+str, Toast.LENGTH_SHORT).toShow();
+            
+            Toast.makeText(MainActivity.this, "收藏："+str, Toast.LENGTH_SHORT).show();
             
         });
         btnFavorite.setOnLongClickListener(v -> {
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity
             );
             favoriteList.setAdapter(adapter);
             favoriteList.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "显示收藏", Toast.LENGTH_SHORT).toShow();
+            Toast.makeText(MainActivity.this, "显示收藏", Toast.LENGTH_SHORT).show();
             return true; // 返回true表示已消费事件
         });
         // 在 WebView 中打开链接
