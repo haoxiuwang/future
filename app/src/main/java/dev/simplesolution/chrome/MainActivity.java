@@ -16,9 +16,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.webkit.WebResourceRequest;
 import dev.simplesolution.chrome.LocalMemory;
+import dev.simplesolution.chrome.ButtonAdapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
+
 public class MainActivity extends AppCompatActivity 
     implements ButtonAdapter.OnButtonClickListener{
 
