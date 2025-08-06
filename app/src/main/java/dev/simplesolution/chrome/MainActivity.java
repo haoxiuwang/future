@@ -21,6 +21,7 @@ import dev.simplesolution.chrome.ButtonAdapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
+import android.widget.View;
 
 public class MainActivity extends AppCompatActivity 
     implements ButtonAdapter.OnButtonClickListener{
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     private void onButtonClick(int position, String item, int memo){
         webView.loadUrl(item);
-        if(!memo){
+        if(0==memo){
             historyPopup.setVisibility(View.GONE);
             return;
         }        
@@ -61,12 +62,14 @@ public class MainActivity extends AppCompatActivity
         historyList = findViewById(R.id.historyList);
         favoriteList = findViewById(R.id.favoriteList);
         btnHistory.setOnClickListener(v ->{
-            history.add(addressBar.getText());
+            history.addRecord(addressBar.getText());
         });
         btnHistory.setOnLongClickListener(v -> {
-            ArrayAdapter<String> adapter = new ButtonAdapter<>(
+            String[] records = history.getAllRecords();
+            List<String> data = new ArrayList<>(Arrays.asList(records));
+            ArrayAdapter<String> adapter = new ButtonAdapter(
                 this,  
-                history.getAllRecords().asList(),
+                data,
                 this,
                 0              // 数据源
             );
@@ -75,14 +78,16 @@ public class MainActivity extends AppCompatActivity
             return true; // 返回true表示已消费事件
         });
         btnFavorite.setOnClickListener(v ->{
-            favorite.add(addressBar.getText());
+            favorite.addRecord(addressBar.getText());
         });
         btnFavorite.setOnLongClickListener(v -> {
-            ArrayAdapter<String> adapter = new ButtonAdapter<>(
+            String[] records = favorite.getAllRecords();
+            List<String> data = new ArrayList<>(Arrays.asList(records));
+            ArrayAdapter<String> adapter = new ButtonAdapter(
                 this,  
-                favorite.getAllRecords().asList(),
+                data,
                 this,
-                1              // 数据源
+                0              // 数据源
             );
             favoriteList.setAdapter(adapter);
             favoriteList.setVisibility(View.VISIBLE);
