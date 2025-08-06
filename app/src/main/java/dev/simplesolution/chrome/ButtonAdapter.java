@@ -40,7 +40,7 @@ public class ButtonAdapter extends BaseAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Toast.makeText(context, "getView被调用开始", Toast.LENGTH_SHORT).show();
+        
         if (convertView == null) {
             convertView = LayoutInflater.from(context)
                 .inflate(R.layout.item_button, parent, false);
@@ -56,7 +56,7 @@ public class ButtonAdapter extends BaseAdapter {
                 listener.onButtonClick(position, item, memo);
             }
         });
-        Toast.makeText(context, "getView被调用", Toast.LENGTH_SHORT).show();
+        
         return convertView;
     }
 }

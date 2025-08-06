@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onButtonClick(int position, String item, int memo){
         webView.loadUrl(item);
-        if(0==memo){
-            historyPopup.setVisibility(View.GONE);
-            return;
-        }        
-        favoritePopup.setVisibility(View.GONE);
+        // if(0==memo){
+        //     historyPopup.setVisibility(View.GONE);
+        //     return;
+        // }        
+        // favoritePopup.setVisibility(View.GONE);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
