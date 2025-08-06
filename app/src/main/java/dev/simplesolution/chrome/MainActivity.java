@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import android.widget.Button;
 import android.view.View;
 import java.util.Arrays; 
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity 
     implements ButtonAdapter.OnButtonClickListener{
@@ -78,10 +79,14 @@ public class MainActivity extends AppCompatActivity
             );
             historyList.setAdapter(adapter);
             historyList.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "显示历史", Toast.LENGTH_SHORT).toShow();
             return true; // 返回true表示已消费事件
         });
         btnFavorite.setOnClickListener(v ->{
-            favorite.addRecord(addressBar.getText().toString());
+            String str = addressBar.getText().toString().trim()
+            favorite.addRecord(str);
+            Toast.makeText(this, "收藏："+str, Toast.LENGTH_SHORT).toShow();
+            
         });
         btnFavorite.setOnLongClickListener(v -> {
             String[] records = favorite.getAllRecords();
@@ -94,6 +99,7 @@ public class MainActivity extends AppCompatActivity
             );
             favoriteList.setAdapter(adapter);
             favoriteList.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "显示收藏", Toast.LENGTH_SHORT).toShow();
             return true; // 返回true表示已消费事件
         });
         // 在 WebView 中打开链接
@@ -110,6 +116,7 @@ public class MainActivity extends AppCompatActivity
                     return true; // 拦截，不交给 WebView 处理
                 }
                 addressBar.setText(url);
+                history.addRecord(url);
                 return false; // 其他情况由 WebView 处理
             }
             @Override
