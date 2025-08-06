@@ -15,20 +15,76 @@ import android.os.Handler;
 import android.content.Intent;
 import android.net.Uri;
 import android.webkit.WebResourceRequest;
-
-public class MainActivity extends AppCompatActivity {
+import dev.simplesolution.chrome.LocalMemory;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Button;
+public class MainActivity extends AppCompatActivity 
+    implements ButtonAdapter.OnButtonClickListener{
 
     private WebView webView;
     private EditText addressBar;
-
+    private ListView historyList;
+    private ListView favoriteList;
+    private Button btnCloseFavorite;
+    private Button btnCloseHistory;
+    private Button btnHistory;
+    private Button btnFavorite;
+    private LinearLayout favoritePopup;
+    private LinearLayout historyPopup;
+    private LocalMemory history;
+    private LocalMemory favorite;
+    @Override
+    private void onButtonClick(int position, String item, int memo){
+        webView.loadUrl(item);
+        if(!memo){
+            historyPopup.setVisibility(View.GONE);
+            return;
+        }        
+        favoritePopup.setVisibility(View.GONE);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        history = new HistoryMemory();
+        favorite = new HistoryMemory();        
         setContentView(R.layout.activity_main);
-
         addressBar = findViewById(R.id.addressBar);
         webView = findViewById(R.id.webView);
-
+        btnHistory = findViewById(R.id.btnHistory);
+        btnFavorite = findViewById(R.id.btnFavorite);
+        btnCloseHistory = findViewById(R.id.btnCloseHistory);
+        btnCloseFavorite = findViewById(R.id.btnCloseFavorite);
+        historyList = findViewById(R.id.historyList);
+        favoriteList = findViewById(R.id.favoriteList);
+        btnHistory.setOnClickListener(v ->{
+            history.add(addressBar.getText());
+        })
+        btnHistory.setOnLongClickListener(v -> {
+            ArrayAdapter<String> adapter = new ButtonAdapter<>(
+                this,  
+                history.getAllRecords().asList(),
+                this,
+                0              // 数据源
+            );
+            historyList.setAdapter(adapter);
+            historyList.setVisibility(View.VISIBLE);
+            return true; // 返回true表示已消费事件
+        });
+        btnFavorite.setOnClickListener(v ->{
+            favorite.add(addressBar.getText());
+        })
+        btnFavorite.setOnLongClickListener(v -> {
+            ArrayAdapter<String> adapter = new ButtonAdapter<>(
+                this,  
+                favorite.getAllRecords().asList(),
+                this,
+                1              // 数据源
+            );
+            favoriteList.setAdapter(adapter);
+            favoriteList.setVisibility(View.VISIBLE);
+            return true; // 返回true表示已消费事件
+        });
         // 在 WebView 中打开链接
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
@@ -47,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onPageFinished(WebView view, String url) {
+                history.addRecord(url);
                 String jsCode = """
                         (function() {
                           
