@@ -40,7 +40,7 @@ public class LocalMemory {
      * @return 包含所有记录的数组（可能包含null）
      */
     public String[] getAllRecords() {
-        return Arrays.copyOf(history, count);
+        return history;
     }
     
     /**
