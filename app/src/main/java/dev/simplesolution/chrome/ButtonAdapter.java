@@ -40,7 +40,7 @@ public class ButtonAdapter extends ArrayAdapter<String> {
                 listener.onButtonClick(position, item, memo);
             }
         });
-        Toast.makeText(MainActivity.this, "getView被调用", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "getView被调用", Toast.LENGTH_SHORT).show();
         return convertView;
     }
 }
