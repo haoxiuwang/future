@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
             ArrayAdapter<String> adapter = new ButtonAdapter(
                 this,  
                 data,
-                this,
+                this,//接口实现
                 0              // 数据源
             );
             historyList.setAdapter(adapter);
