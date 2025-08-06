@@ -42,7 +42,7 @@ public class ButtonAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Toast.makeText(context, "getView被调用开始", Toast.LENGTH_SHORT).show();
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext())
+            convertView = LayoutInflater.from(context)
                 .inflate(R.layout.item_button, parent, false);
         }
 
