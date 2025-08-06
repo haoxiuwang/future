@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 import java.util.List;
 import java.util.ArrayList; 
 
@@ -39,7 +40,7 @@ public class ButtonAdapter extends ArrayAdapter<String> {
                 listener.onButtonClick(position, item, memo);
             }
         });
-
+        Toast.makeText(MainActivity.this, "getView被调用", Toast.LENGTH_SHORT).show();
         return convertView;
     }
 }
