@@ -83,9 +83,7 @@ public class MainActivity extends AppCompatActivity
             0              // 数据源
         );
         historyList.setAdapter(adapter);
-        btnHistory.setOnClickListener(v ->{
-            history.addRecord(addressBar.getText().toString());
-        });
+        
         btnHistory.setOnLongClickListener(v -> {            
             historyList.setVisibility(View.VISIBLE);
             Toast.makeText(MainActivity.this, "显示历史", Toast.LENGTH_SHORT).show();
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         btnFavorite.setOnClickListener(v ->{
             String str = addressBar.getText().toString().trim();
             favorite.addRecord(str);
-            
+            adapter_f.notifyDataSetChanged();
             Toast.makeText(MainActivity.this, "收藏："+str, Toast.LENGTH_SHORT).show();
             
         });
@@ -123,6 +121,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onPageFinished(WebView view, String url) {
                 history.addRecord(url);
+                adapter_h.notifyDataSetChanged();
                 String jsCode = """
                         (function() {
                           
