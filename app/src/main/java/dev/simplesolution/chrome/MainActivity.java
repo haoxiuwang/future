@@ -20,6 +20,8 @@ import dev.simplesolution.chrome.LocalMemory;
 import dev.simplesolution.chrome.ButtonAdapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import java.util.List; 
+import java.util.ArrayList; 
 import android.widget.Button;
 import android.view.View;
 
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity
         historyList = findViewById(R.id.historyList);
         favoriteList = findViewById(R.id.favoriteList);
         btnHistory.setOnClickListener(v ->{
-            history.addRecord(addressBar.getText());
+            history.addRecord(addressBar.getText().toString());
         });
         btnHistory.setOnLongClickListener(v -> {
             String[] records = history.getAllRecords();
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity
             return true; // 返回true表示已消费事件
         });
         btnFavorite.setOnClickListener(v ->{
-            favorite.addRecord(addressBar.getText());
+            favorite.addRecord(addressBar.getText().toString());
         });
         btnFavorite.setOnLongClickListener(v -> {
             String[] records = favorite.getAllRecords();
