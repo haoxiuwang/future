@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
         favoriteList = findViewById(R.id.favoriteList);
         btnHistory.setOnClickListener(v ->{
             history.add(addressBar.getText());
-        })
+        });
         btnHistory.setOnLongClickListener(v -> {
             ArrayAdapter<String> adapter = new ButtonAdapter<>(
                 this,  
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         });
         btnFavorite.setOnClickListener(v ->{
             favorite.add(addressBar.getText());
-        })
+        });
         btnFavorite.setOnLongClickListener(v -> {
             ArrayAdapter<String> adapter = new ButtonAdapter<>(
                 this,  
