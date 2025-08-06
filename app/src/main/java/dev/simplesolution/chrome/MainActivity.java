@@ -6,6 +6,7 @@ import android.view.inputmethod.EditorInfo;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.webkit.JsResult;
 import android.app.AlertDialog;
