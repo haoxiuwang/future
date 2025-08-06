@@ -14,14 +14,16 @@ public class ButtonAdapter extends BaseAdapter {
     private OnButtonClickListener listener;
     private int memo;
     private final LocalMemory memory;
+    private Context context;
     public interface OnButtonClickListener {
         void onButtonClick(int position, String item, int memo);
     }
 
-    public ButtonAdapter(LocalMemory memory, OnButtonClickListener listener, int memo) {
+    public ButtonAdapter(Context context, LocalMemory memory, OnButtonClickListener listener, int memo) {
         this.listener = listener;
         this.memo = memo;
         this.memory = memory;
+        this.context = context;
     }
      @Override
     public int getCount() {
@@ -30,12 +32,15 @@ public class ButtonAdapter extends BaseAdapter {
 
     @Override
     public String getItem(int position) {
-        return memory.getHistoryArrayForAdapter()[position]; // 直接访问原数组
+        return memory.getRawArrayForAdapter()[position]; // 直接访问原数组
     }
-
+    @Override
+    public long getItemId(int position) {
+        return position; // 如果没有唯一ID，直接返回position
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Toast.makeText(getContext(), "getView被调用开始", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "getView被调用开始", Toast.LENGTH_SHORT).show();
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext())
                 .inflate(R.layout.item_button, parent, false);
@@ -51,7 +56,7 @@ public class ButtonAdapter extends BaseAdapter {
                 listener.onButtonClick(position, item, memo);
             }
         });
-        Toast.makeText(getContext(), "getView被调用", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "getView被调用", Toast.LENGTH_SHORT).show();
         return convertView;
     }
 }

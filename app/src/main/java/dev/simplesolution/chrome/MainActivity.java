@@ -18,7 +18,7 @@ import android.net.Uri;
 import android.webkit.WebResourceRequest;
 import dev.simplesolution.chrome.LocalMemory;
 import dev.simplesolution.chrome.ButtonAdapter;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import java.util.List; 
 import java.util.ArrayList; 
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity
        
         
         BaseAdapter adapter_f = new ButtonAdapter(
+            this,
             favorite,
             this,
             0              // 数据源
@@ -78,11 +79,12 @@ public class MainActivity extends AppCompatActivity
         
             
         BaseAdapter adapter_h = new ButtonAdapter(
+            this,
             history,
             this,
             0              // 数据源
         );
-        historyList.setAdapter(adapter);
+        historyList.setAdapter(adapter_h);
         
         btnHistory.setOnLongClickListener(v -> {            
             historyList.setVisibility(View.VISIBLE);
