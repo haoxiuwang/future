@@ -21,7 +21,7 @@ import dev.simplesolution.chrome.ButtonAdapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
-import android.widget.View;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity 
     implements ButtonAdapter.OnButtonClickListener{
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     private LocalMemory history;
     private LocalMemory favorite;
     @Override
-    private void onButtonClick(int position, String item, int memo){
+    public void onButtonClick(int position, String item, int memo){
         webView.loadUrl(item);
         if(0==memo){
             historyPopup.setVisibility(View.GONE);
