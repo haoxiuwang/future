@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity
         historyList.setAdapter(adapter_h);
         
         btnHistory.setOnLongClickListener(v -> {            
-            favoritePopup.setVisibility(View.VISIBLE);
+            historyPopup.setVisibility(View.VISIBLE);
             
             return true; // 返回true表示已消费事件
         });
