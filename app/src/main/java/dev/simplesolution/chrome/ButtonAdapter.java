@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 import dev.simplesolution.chrome.LocalMemory;
-
+import java.net.URL;
 
 
 public class ButtonAdapter extends BaseAdapter {
@@ -48,7 +48,8 @@ public class ButtonAdapter extends BaseAdapter {
 
         String item = getItem(position);
         Button button = convertView.findViewById(R.id.list_button);
-        button.setText(item);
+        Url url = new Url(item);
+        button.setText(item.getHost());
 
         // 设置点击事件
         button.setOnClickListener(v -> {
