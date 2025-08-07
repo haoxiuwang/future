@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity
         favoriteList = findViewById(R.id.favoriteList);        
        
         btnCloseHistory.setOnClickListener(v ->{
-            btnCloseHistory.setVisibility(View.GONE);
+            historyPopup.setVisibility(View.GONE);
         });
         btnCloseFavorite.setOnClickListener(v ->{
-            btnCloseFavorite.setVisibility(View.GONE);
+            favoritePopup.setVisibility(View.GONE);
         });
         BaseAdapter adapter_f = new ButtonAdapter(
             this,
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         historyList.setAdapter(adapter_h);
         
         btnHistory.setOnLongClickListener(v -> {            
-            historyList.setVisibility(View.VISIBLE);
+            favoritePopup.setVisibility(View.VISIBLE);
             Toast.makeText(MainActivity.this, "显示历史", Toast.LENGTH_SHORT).show();
             return true; // 返回true表示已消费事件
         });
@@ -100,13 +100,13 @@ public class MainActivity extends AppCompatActivity
             String str = addressBar.getText().toString().trim();
             favorite.addRecord(str);
             adapter_f.notifyDataSetChanged();
-            Toast.makeText(MainActivity.this, "收藏："+str, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(MainActivity.this, "收藏："+str, Toast.LENGTH_SHORT).show();
             
         });
         btnFavorite.setOnLongClickListener(v -> {
             
-            favoriteList.setVisibility(View.VISIBLE);
-            Toast.makeText(MainActivity.this, "显示收藏", Toast.LENGTH_SHORT).show();
+            favoritePopup.setVisibility(View.VISIBLE);
+            // Toast.makeText(MainActivity.this, "显示收藏", Toast.LENGTH_SHORT).show();
             return true; // 返回true表示已消费事件
         });
         // 在 WebView 中打开链接
