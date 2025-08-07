@@ -68,7 +68,12 @@ public class MainActivity extends AppCompatActivity
         historyList = findViewById(R.id.historyList);
         favoriteList = findViewById(R.id.favoriteList);        
        
-        
+        btnCloseHistory.setOnClickListener(v ->{
+            btnCloseHistory.setVisibility(View.GONE);
+        });
+        btnCloseFavorite.setOnClickListener(v ->{
+            btnCloseFavorite.setVisibility(View.GONE);
+        })
         BaseAdapter adapter_f = new ButtonAdapter(
             this,
             favorite,
