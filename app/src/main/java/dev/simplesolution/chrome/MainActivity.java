@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.view.View;
 import java.util.Arrays; 
 import android.widget.Toast;
+// import dev.simplesolution.chrome.FileLogger;
 
 public class MainActivity extends AppCompatActivity 
     implements ButtonAdapter.OnButtonClickListener{
@@ -69,7 +70,23 @@ public class MainActivity extends AppCompatActivity
         favoriteList = findViewById(R.id.favoriteList);        
        
         btnCloseHistory.setOnClickListener(v ->{
-            historyPopup.setVisibility(View.GONE);
+            Toast.makeText(MainActivity.this, "关闭", Toast.LENGTH_SHORT).show();
+            if (historyPopup != null) {
+                try {
+                    historyPopup.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    
+                    // 调用示例
+                    // FileLogger.e("MyApp", "历史记录弹窗隐藏失败");
+                    // Log.e("TAG", "隐藏弹窗异常", e);
+                    // 可选：Toast 提示用户
+                    if(str!=null){
+                        Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            } else {
+                Log.e("TAG", "historyPopup 是 null，请检查初始化");
+            }
         });
         btnCloseFavorite.setOnClickListener(v ->{
             favoritePopup.setVisibility(View.GONE);
@@ -93,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         
         btnHistory.setOnLongClickListener(v -> {            
             favoritePopup.setVisibility(View.VISIBLE);
-            Toast.makeText(MainActivity.this, "显示历史", Toast.LENGTH_SHORT).show();
+            
             return true; // 返回true表示已消费事件
         });
         btnFavorite.setOnClickListener(v ->{
