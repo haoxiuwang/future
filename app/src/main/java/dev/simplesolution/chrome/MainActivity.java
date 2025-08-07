@@ -106,9 +106,13 @@ public class MainActivity extends AppCompatActivity
         historyList.setAdapter(adapter_h);
         
         btnHistory.setOnLongClickListener(v -> {            
-            historyPopup.setVisibility(View.VISIBLE);
-            
-            return true; // 返回true表示已消费事件
+            historyPopup.setVisibility(View.VISIBLE);            
+            return true; 
+        });
+        
+        btnHistory.setOnClickListener(v -> {            
+            historyPopup.setVisibility(View.VISIBLE);            
+            return true; 
         });
         btnFavorite.setOnClickListener(v ->{
             String str = addressBar.getText().toString().trim();
