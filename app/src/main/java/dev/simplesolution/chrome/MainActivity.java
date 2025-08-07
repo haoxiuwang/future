@@ -112,13 +112,13 @@ public class MainActivity extends AppCompatActivity
         
         btnHistory.setOnClickListener(v -> {            
             historyPopup.setVisibility(View.VISIBLE);            
-            return true; 
+        
         });
+
         btnFavorite.setOnClickListener(v ->{
             String str = addressBar.getText().toString().trim();
             favorite.addRecord(str);
             adapter_f.notifyDataSetChanged();
-            // Toast.makeText(MainActivity.this, "收藏："+str, Toast.LENGTH_SHORT).show();
             
         });
         btnFavorite.setOnLongClickListener(v -> {
