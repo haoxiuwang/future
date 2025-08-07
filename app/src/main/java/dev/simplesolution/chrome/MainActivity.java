@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         });
         btnCloseFavorite.setOnClickListener(v ->{
             btnCloseFavorite.setVisibility(View.GONE);
-        })
+        });
         BaseAdapter adapter_f = new ButtonAdapter(
             this,
             favorite,
