@@ -77,11 +77,11 @@ public class MainActivity extends AppCompatActivity
                 } catch (Exception e) {                   
                     String msg = e.getMessage();
                     if(msg!=null){
-                        Toast.makeText(context, "error:"+msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "error:"+msg, Toast.LENGTH_SHORT).show();
                     }
                 }
             } else {
-                Log.e("TAG", "historyPopup 是 null，请检查初始化");
+                Toast.makeText(this, "historyPop is null!", Toast.LENGTH_SHORT).show();
             }
         });
         btnCloseFavorite.setOnClickListener(v ->{
