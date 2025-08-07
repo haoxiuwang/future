@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import dev.simplesolution.chrome.LocalMemory;
 import java.net.URL;
+import java.net.MalformedURLException;
 
 
 public class ButtonAdapter extends BaseAdapter {
@@ -48,15 +49,22 @@ public class ButtonAdapter extends BaseAdapter {
 
         String item = getItem(position);
         Button button = convertView.findViewById(R.id.list_button);
-        URL url = new URL(item);
-        button.setText(url.getHost());
-
-        // 设置点击事件
-        button.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onButtonClick(position, item, memo);
-            }
-        });
+        
+        try {
+            URL url = new URL(item);
+            button.setText(url.getHost());
+            // 设置点击事件
+            button.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onButtonClick(position, item, memo);
+                }
+            });
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        
+        
         
         return convertView;
     }
