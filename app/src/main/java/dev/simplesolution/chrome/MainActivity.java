@@ -74,14 +74,10 @@ public class MainActivity extends AppCompatActivity
             if (historyPopup != null) {
                 try {
                     historyPopup.setVisibility(View.GONE);
-                } catch (Exception e) {
-                    
-                    // 调用示例
-                    // FileLogger.e("MyApp", "历史记录弹窗隐藏失败");
-                    // Log.e("TAG", "隐藏弹窗异常", e);
-                    // 可选：Toast 提示用户
-                    if(str!=null){
-                        Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {                   
+                    String msg = e.getMessage();
+                    if(msg!=null){
+                        Toast.makeText(context, "error:"+msg, Toast.LENGTH_SHORT).show();
                     }
                 }
             } else {
