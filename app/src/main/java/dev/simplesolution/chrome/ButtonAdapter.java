@@ -48,7 +48,7 @@ public class ButtonAdapter extends BaseAdapter {
 
         String item = getItem(position);
         Button button = convertView.findViewById(R.id.list_button);
-        Url url = new Url(item);
+        URL url = new URL(item);
         button.setText(item.getHost());
 
         // 设置点击事件
