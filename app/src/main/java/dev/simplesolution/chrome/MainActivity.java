@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity
         btnCloseFavorite = findViewById(R.id.btnCloseFavorite);
         historyList = findViewById(R.id.historyList);
         favoriteList = findViewById(R.id.favoriteList);        
-       
+        favoritePopup = findViewById(R.id.favoritePopup);
+        historyPopup = findViewById(R.id.historyPopup);
         btnCloseHistory.setOnClickListener(v ->{
             Toast.makeText(MainActivity.this, "关闭", Toast.LENGTH_SHORT).show();
             if (historyPopup != null) {
