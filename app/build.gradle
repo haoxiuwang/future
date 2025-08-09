@@ -1,0 +1,33 @@
+
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    namespace 'dev.simplesolution.chrome'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "dev.simplesolution.chrome"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'org.nanohttpd:nanohttpd:2.3.1' 
+}

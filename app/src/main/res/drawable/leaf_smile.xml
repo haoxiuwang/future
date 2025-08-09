@@ -1,0 +1,28 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- 树叶形状 -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M100,10 C130,40 130,80 100,110 C70,80 70,40 100,10 Z" />
+
+    <!-- 左眼 -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M90,55 a5,5 0 1,0 0.01,0" />
+
+    <!-- 右眼 -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M110,55 a5,5 0 1,0 0.01,0" />
+
+    <!-- 微笑 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#000000"
+        android:strokeWidth="3"
+        android:pathData="M85,80 Q100,95 115,80" />
+</vector>

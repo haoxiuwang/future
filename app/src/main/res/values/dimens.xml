@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="max_image_width" type="dimen">70%</item>
+</resources>

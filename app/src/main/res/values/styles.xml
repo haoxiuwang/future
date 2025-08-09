@@ -1,0 +1,9 @@
+<resources>
+    <style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 去除状态栏 -->
+        <item name="android:windowFullscreen">true</item>
+        <!-- 去除标题栏（已由 NoActionBar 处理） -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+</resources>
