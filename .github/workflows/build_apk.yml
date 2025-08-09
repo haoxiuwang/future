@@ -24,10 +24,7 @@ jobs:
         with:
           api-level: 34               # 你项目的 compileSdkVersion
           build-tools: 34.0.0         # 对应的 build-tools 版本
-          cache: true             
-
-      - name: Install Gradle (to generate wrapper)
-        uses: gradle/gradle-build-action@v2
+          cache: true  
 
       - name: Generate Gradle Wrapper
         run: gradle wrapper --gradle-version 8.4
